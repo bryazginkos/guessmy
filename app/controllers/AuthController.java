@@ -20,13 +20,6 @@ public class AuthController extends Controller {
     @Inject
     private AuthService authService;
 
-    private static final String USERNAME_SESSION_KEY = "name";
-
-    public Result index() {
-        return ok(index.render(session().get(USERNAME_SESSION_KEY)));
-    }
-
-
     public Result login() {
         return ok(login.render(Form.form(LoginForm.class), null));
     }
@@ -41,8 +34,8 @@ public class AuthController extends Controller {
         try {
             authService.addUser(registrationForm.get());
             session().clear();
-            session(USERNAME_SESSION_KEY, registrationForm.get().getName());
-            return Results.redirect(routes.AuthController.index());
+            session(Constants.USERNAME_SESSION_KEY, registrationForm.get().getName());
+            return Results.redirect(routes.GuestController.index());
         } catch (AuthException e) {
             return badRequest(registration.render(registrationForm, e.getMessage()));
         } catch (SystemException e) {
@@ -58,9 +51,9 @@ public class AuthController extends Controller {
         try {
             User user = authService.authUser(loginForm.get());
             session().clear();
-            session(USERNAME_SESSION_KEY, user.getName());
+            session(Constants.USERNAME_SESSION_KEY, user.getName());
             return Results.redirect(
-                    routes.AuthController.index()
+                    routes.GuestController.index()
             );
         } catch (AuthException e) {
             return badRequest(login.render(loginForm, e.getMessage()));
