@@ -1,0 +1,28 @@
+@import model.forms.LoginForm
+@(form: Form[LoginForm])
+<html>
+    <head>
+        <title>Zentasks</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        @helper.form(routes.AuthController.authenticate()) {
+            <h1>Sign in</h1>
+            @if(form.hasGlobalErrors) {
+                <p class="error">
+                @form.globalError.message
+                </p>
+            }
+            <p>
+                <input type="email" name="email" placeholder="Email" value="@form("email").value">
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="Password">
+            </p>
+            <p>
+                <button type="submit">Login</button>
+            </p>
+        }
+    </body>
+</html>

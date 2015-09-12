@@ -1,7 +1,16 @@
-@(message: String)
+@(userName: String)
 
-@main("Welcome to Play") {
-
-    @play20.welcome(message, style = "Java")
+@main("Guess my service") {
+    <div>Here is the description of service</div>
+    @if(userName != null) {
+        <div> Hello @userName </div>
+        <div>
+            <a href="@routes.AuthController.logout()">Logout</a>
+        </div>
+    } else {
+        <div>
+            <a href="@routes.AuthController.login()">Login</a>
+        </div>
+    }
 
 }
