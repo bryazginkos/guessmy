@@ -1,5 +1,5 @@
 @import model.forms.LoginForm
-@(form: Form[LoginForm])
+@(form: Form[LoginForm])(errorMessage : String)
 <html>
     <head>
         <title>Zentasks</title>
@@ -9,9 +9,9 @@
     <body>
         @helper.form(routes.AuthController.authenticate()) {
             <h1>Sign in</h1>
-            @if(form.hasGlobalErrors) {
+            @if(errorMessage != null) {
                 <p class="error">
-                @form.globalError.message
+                @errorMessage
                 </p>
             }
             <p>

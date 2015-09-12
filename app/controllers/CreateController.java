@@ -1,6 +1,5 @@
 package controllers;
 
-import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -14,6 +13,6 @@ public class CreateController extends Controller {
 
     @Security.Authenticated(Secured.class)
     public Result create() {
-        return ok(create.render(session().get("email")));
+        return ok(create.render(""));
     }
 }

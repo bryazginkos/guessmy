@@ -1,17 +1,28 @@
-@()
+@import model.forms.RegistrationForm
+@(form: Form[RegistrationForm])(error : String)
 @main("Registration") {
     <div>Please enter your email and password</div>
-    <p>
-        <input type="email" name="email" placeholder="Email">
-    </p>
-    <p>
-        <input type="password" name="password1" placeholder="Password">
-    </p>
+    <form action="@routes.AuthController.addUser()" method="post">
+        <p>
+            <input type="email" name="email" placeholder="Email" value="@form("email").value">
+        </p>
+        <p>
+            <input type="text" name="name" placeholder="Name" value="@form("name").value">
+        </p>
+        <p>
+            <input type="password" name="password1" placeholder="Password">
+        </p>
 
-    <p>
-        <input type="password" name="password2" placeholder="Repeat password">
-    </p>
-    <p>
-        <button type="submit">Login</button>
-    </p>
+        <p>
+            <input type="password" name="password2" placeholder="Repeat password">
+        </p>
+        <p>
+            <button type="submit">Login</button>
+        </p>
+    </form>
+    @if(error != null) {
+        <p>
+        @error
+        </p>
+    }
 }

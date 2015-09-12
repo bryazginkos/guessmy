@@ -12,5 +12,7 @@ GET         /login               @controllers.AuthController.login()
 POST        /login               @controllers.AuthController.authenticate()
 GET         /logout              @controllers.AuthController.logout()
 GET         /reg                 @controllers.AuthController.registration()
+POST        /adduser             @controllers.AuthController.addUser()
 
 GET         /create              @controllers.CreateController.create()
+
